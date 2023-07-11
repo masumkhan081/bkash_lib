@@ -23,13 +23,10 @@ function Bkash(username, password, app_key, app_secret, merchant_wallet, base_ur
         // this.id_token = resp.id_token;
         // this.refresh_token = resp.refresh_token
         //
-        // console.log(resp)
+       // console.log(resp)
 
     })
 
-    // agreement = new Agreement(this);
-    // payment = new Payment(this);
-    // trx = new Transaction(this);
 
 }
 

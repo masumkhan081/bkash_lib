@@ -22,7 +22,7 @@ async function req_handler(base_url, method, headers, data, payerReference) { //
     config.data = {
         mode: "0000",
         payerReference,
-        callbackURL: "https://masumk081.web.app/",
+        callbackURL: "http://localhost:3000/",
         amount: "0",
         currency: "BDT",
         intent: "sale",
@@ -31,22 +31,30 @@ async function req_handler(base_url, method, headers, data, payerReference) { //
     config.url = base_url + "/create";
     resp = await axios(config);
     merchant_and_bkash.paymentID = resp.data.paymentID;
-    //
+    merchant_and_bkash.bkashURL = resp.data.bkashURL
+
     // to get agreement id - execute agreement
     config.data = {
         paymentID: resp.data.paymentID
     }
-    config.url = base_url + "/execute";
+
+    console.log(resp.data)
+
+    config.url = base_url + "/execute"
+    // config.url = resp.data.bkashURL + "/tokenized/checkout/execute"
+
     resp = await axios(config);
+
+
     console.log(JSON.stringify(resp.data))
     // merchant_and_bkash.paymentID = resp.data.paymentID;
 
-  //  console.log(config)
+    // console.log(config)
     // console.log(merchant_and_bkash)
 
     // console.log(JSON.stringify(resp.data))
     // return res.data;
-    return "merchant_and_bkash";
+    return merchant_and_bkash;
 }
 
 module.exports = req_handler;
